@@ -1,0 +1,32 @@
+version: '3.0'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    volumes:
+      - ./data/zookeeper:/opt/zookeeper*
+
+  kafka:
+    image: wurstmeister/kafka
+    restart: always
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/kafka:/kafka
+    depends_on:
+      - zookeeper
+
+  kafka_manager:
+    image: hlebalbau/kafka-manager:stable
+    ports:
+      - "8091:9000"
+    environment:
+      ZK_HOSTS: "zookeeper:2181"
+      APPLICATION_SECRET: "random-secret"
+    restart: always
