@@ -13,9 +13,20 @@ services:
     restart: always
     ports:
       - "9092:9092"
+      - "1099:1099"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_HOST_NAME: 172.16.131.5
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_JMX_OPTS: "
+          -Dcom.sun.management.jmxremote
+          -Dcom.sun.management.jmxremote.authenticate=false
+          -Dcom.sun.management.jmxremote.ssl=false
+          -Dcom.sun.management.jmxremote.port=1099
+          -Dcom.sun.management.jmxremote.rmi.port=1099
+          -Djava.rmi.server.hostname=172.16.131.5
+      "
+      JMX_PORT: 1099
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data/kafka:/kafka
