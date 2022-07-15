@@ -16,7 +16,6 @@ services:
       - http.cors.enabled=true
       - http.cors.allow-origin=*
       - xpack.security.enabled=true
-      - xpack.security.audit.enabled=true
       - ELASTIC_PASSWORD=somethingsecret
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
