@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+
+  rabbitmq:
+    restart: always
+    image: rabbitmq:latest
+    ports:
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "user"
+      RABBITMQ_DEFAULT_PASS: "password"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    volumes:
+      - ./docker-data/rabbitmq:/var/lib/rabbitmq
