@@ -11,4 +11,4 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./postgres-data-dev:/var/lib/postgresql/
+      - ./docker-data/postgres:/var/lib/postgresql/
