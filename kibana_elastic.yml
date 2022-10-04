@@ -18,7 +18,7 @@ services:
       - xpack.security.enabled=true
       - ELASTIC_PASSWORD=somethingsecret
     volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
+      - ./docker-data/elasticsearch-data:/usr/share/elasticsearch/data
   kibana:
     restart: always
     image: docker.elastic.co/kibana/kibana:7.11.0
@@ -30,7 +30,3 @@ services:
       - ELASTICSEARCH_URL=http://elasticsearch:9200/
       - ELASTICSEARCH_USERNAME=elastic
       - ELASTICSEARCH_PASSWORD=somethingsecret
-
-
-volumes:
-  elasticsearch-data:
