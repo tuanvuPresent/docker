@@ -12,6 +12,8 @@ services:
       MYSQL_PASSWORD: admin
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: mysql_db
+    volumes:
+      - ./docker-data/mysql-data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
