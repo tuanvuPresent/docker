@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  redis-master:
+    image: redis:latest
+    hostname: redis-master
+    volumes:
+      - ./redis_master:/data
+    ports:
+      - '6378:6379'
+
+  redis-slave:
+    image: redis:latest
+    hostname: redis-slave
+    volumes:
+      - ./redis_slave:/data
+    ports:
+      - '6479:6379'
+    command: redis-server --slaveof redis-master 6379
+
+  redis-slave1:
+    image: redis:latest
+    hostname: redis-slave
+    volumes:
+      - ./redis_slave1:/data
+    ports:
+      - '6478:6379'
+    command: redis-server --slaveof redis-master 6379
